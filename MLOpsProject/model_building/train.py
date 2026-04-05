@@ -66,12 +66,12 @@ xgb_model = xgb.XGBClassifier(scale_pos_weight=class_weight, random_state=42)
 
 # Define hyperparameter grid
 param_grid = {
-    'xgbregressor__n_estimators': [50, 100, 150],
-    'xgbregressor__max_depth': [3, 5, 7],
-    'xgbregressor__learning_rate': [0.01, 0.05, 0.1],
-    'xgbregressor__subsample': [0.7, 0.8, 1.0],
-    'xgbregressor__colsample_bytree': [0.7, 0.8, 1.0],
-    'xgbregressor__reg_lambda': [0.1, 1, 10]
+    'xgbclassifier__n_estimators': [50, 100, 150],
+    'xgbclassifier__max_depth': [3, 5, 7],
+    'xgbclassifier__learning_rate': [0.01, 0.05, 0.1],
+    'xgbclassifier__subsample': [0.7, 0.8, 1.0],
+    'xgbclassifier__colsample_bytree': [0.7, 0.8, 1.0],
+    'xgbclassifier__reg_lambda': [0.1, 1, 10]
 }
 
 # Create pipeline
@@ -102,7 +102,7 @@ with mlflow.start_run():
   y_pred_train = best_model.predict(Xtrain)
   y_pred_test = best_model.predict(Xtest)
 
-  # Metrics (FIXED: Swapped Regression for Classification metrics)
+  # Metrics 
   train_acc = accuracy_score(ytrain, y_pred_train)
   test_acc = accuracy_score(ytest, y_pred_test)
 
