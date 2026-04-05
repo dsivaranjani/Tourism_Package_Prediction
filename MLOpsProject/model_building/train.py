@@ -21,7 +21,7 @@ mlflow.set_tracking_uri(tracking_uri)
 # mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("mlops-training-experiment")
 
-api = HfApi()
+api = HfApi(token=os.getenv("HF_TOKEN"))
 
 Xtrain_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/Xtrain.csv"
 Xtest_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/Xtest.csv"
@@ -102,24 +102,19 @@ with mlflow.start_run():
   y_pred_train = best_model.predict(Xtrain)
   y_pred_test = best_model.predict(Xtest)
 
-  # Metrics
-  train_rmse = mean_squared_error(ytrain, y_pred_train, squared=False)
-  test_rmse = mean_squared_error(ytest, y_pred_test, squared=False)
+  # Metrics (FIXED: Swapped Regression for Classification metrics)
+  train_acc = accuracy_score(ytrain, y_pred_train)
+  test_acc = accuracy_score(ytest, y_pred_test)
 
-  train_mae = mean_absolute_error(ytrain, y_pred_train)
-  test_mae = mean_absolute_error(ytest, y_pred_test)
-
-  train_r2 = r2_score(ytrain, y_pred_train)
-  test_r2 = r2_score(ytest, y_pred_test)
+  train_recall = recall_score(ytrain, y_pred_train)
+  test_recall = recall_score(ytest, y_pred_test)
 
   # Log metrics
   mlflow.log_metrics({
-      "train_RMSE": train_rmse,
-      "test_RMSE": test_rmse,
-      "train_MAE": train_mae,
-      "test_MAE": test_mae,
-      "train_R2": train_r2,
-      "test_R2": test_r2
+      "train_Accuracy": train_acc,
+      "test_Accuracy": test_acc,
+      "train_Recall": train_recall,
+      "test_Recall": test_recall
   })
 
   # Evaluation
