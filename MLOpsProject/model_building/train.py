@@ -16,7 +16,9 @@ from huggingface_hub import login, HfApi, create_repo
 from huggingface_hub.utils import RepositoryNotFoundError, HfHubHTTPError
 import mlflow
 
-mlflow.set_tracking_uri("http://localhost:5000")
+tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "file://" + os.path.abspath("./mlruns"))
+mlflow.set_tracking_uri(tracking_uri)
+# mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("mlops-training-experiment")
 
 api = HfApi()
@@ -25,7 +27,7 @@ Xtrain_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/Xtrain.csv"
 Xtest_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/Xtest.csv"
 ytrain_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/ytrain.csv"
 ytest_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/ytest.csv"
-
+Xtest.csv
 Xtrain = pd.read_csv(Xtrain_path)
 Xtest = pd.read_csv(Xtest_path)
 ytrain = pd.read_csv(ytrain_path)
