@@ -27,7 +27,7 @@ Xtrain_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/Xtrain.csv"
 Xtest_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/Xtest.csv"
 ytrain_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/ytrain.csv"
 ytest_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/ytest.csv"
-Xtest.csv
+
 Xtrain = pd.read_csv(Xtrain_path)
 Xtest = pd.read_csv(Xtest_path)
 ytrain = pd.read_csv(ytrain_path)
