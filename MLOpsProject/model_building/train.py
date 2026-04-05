@@ -21,7 +21,7 @@ mlflow.set_tracking_uri(tracking_uri)
 # mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("mlops-training-experiment")
 
-api = HfApi(token=os.getenv("HF_TOKEN"))
+# api = HfApi(token=os.getenv("HF_TOKEN"))
 
 Xtrain_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/Xtrain.csv"
 Xtest_path = "hf://datasets/RanjaniD/Tourism-Package-Prediction/Xtest.csv"
@@ -136,7 +136,7 @@ with mlflow.start_run():
   repo_id = "RanjaniD/Tourism-Package-Prediction"
   repo_type = "model"
 
-  # api = HfApi(token=os.getenv("HF_TOKEN"))
+  api = HfApi(token=os.getenv("HF_TOKEN"))
 
   # Step 1: Check if the space exists
   try:
